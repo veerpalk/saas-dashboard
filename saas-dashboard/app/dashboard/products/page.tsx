@@ -136,6 +136,7 @@ export default function ProductsPage() {
     }),
   ];
 
+  // eslint-disable-next-line react-hooks/incompatible-library -- TanStack Table API
   const table = useReactTable({
     data: products,
     columns,

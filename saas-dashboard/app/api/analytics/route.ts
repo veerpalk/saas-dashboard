@@ -63,11 +63,7 @@ export async function GET(req: NextRequest) {
     }
 
     for (const p of products) {
-      // Firestore Timestamps have a toDate() method; plain JS Dates work too
-      const ts =
-        p.createdAt instanceof Date
-          ? p.createdAt
-          : (p.createdAt as any)?.toDate?.() ?? new Date(p.createdAt as any);
+      const ts = toDate(p.createdAt);
 
       if (ts.getTime() >= thirtyDaysAgo) {
         const key = ts.toISOString().slice(0, 10);
@@ -90,4 +86,11 @@ export async function GET(req: NextRequest) {
     console.error("[GET /api/analytics]", err);
     return Response.json({ error: "Failed to load analytics" }, { status: 500 });
   }
+}
+
+function toDate(value: Product["createdAt"]): Date {
+  if (value instanceof Date) return value;
+  const firestoreTs = value as { toDate?: () => Date };
+  if (typeof firestoreTs.toDate === "function") return firestoreTs.toDate();
+  return new Date(value);
 }

@@ -336,7 +336,7 @@ Admin-only endpoints call `requireAdmin(role)` before any Firestore operation:
 | **Hard delete products** | `.delete()` removes document | Simplest CRUD; production would use soft delete + audit log |
 | **No automated tests** | Playwright in devDependencies, no test files | Time constraint |
 | **Minimal observability** | `console.error` with route tags in API catch blocks | No structured logging, Sentry, or performance monitoring yet |
-| **No CI/CD pipeline** | No GitHub Actions or deployment config | Documented as next step; build passes locally |
+| **CI/CD pipeline** | GitHub Actions (lint, typecheck, build) | Vercel deploy configured via dashboard — see [docs/08-ci-cd-and-deployment.md](./docs/08-ci-cd-and-deployment.md) |
 | **Open registration** | Anyone can register as `viewer` | Admin promotes users manually; production would use invites |
 | **Analytics computed on read** | Full product scan per dashboard load | Simple; would use aggregate doc or scheduled rollups at scale |
 | **Create/edit pages lack client admin redirect** | Viewer sees form but API returns 403 | Server enforcement holds; UX gap only |
@@ -349,7 +349,7 @@ If I had another week, priority order:
 
 1. **Structured logging + Sentry** — replace `console.error` with JSON logger; add error tracking and request timing (`durationMs`). See [docs/07-observability.md](./docs/07-observability.md).
 
-2. **CI/CD** — GitHub Actions (lint, typecheck, build) + deploy to Vercel with environment variables. Fix existing lint errors first.
+2. **Vercel production deploy** — connect GitHub repo, set root to `saas-dashboard`, add Firebase env vars. See [docs/08-ci-cd-and-deployment.md](./docs/08-ci-cd-and-deployment.md).
 
 3. **`httpOnly` session cookies** — use `firebase-admin` `createSessionCookie()` for hardened auth flow.
 
@@ -414,6 +414,7 @@ In-depth guides for each project requirement:
 | [docs/05-role-based-ui-differences.md](./docs/05-role-based-ui-differences.md) | Admin vs viewer UI + server enforcement |
 | [docs/06-search-and-pagination.md](./docs/06-search-and-pagination.md) | Client-side search/pagination, cursor evolution |
 | [docs/07-observability.md](./docs/07-observability.md) | Logging, error tracking, performance monitoring |
+| [docs/08-ci-cd-and-deployment.md](./docs/08-ci-cd-and-deployment.md) | GitHub Actions CI + Vercel deployment |
 
 ---
 

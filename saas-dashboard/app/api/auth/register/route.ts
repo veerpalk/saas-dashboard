@@ -20,7 +20,9 @@ export async function POST(req: NextRequest) {
     await createUser(userRecord.uid, email, role);
 
     return NextResponse.json({ uid: userRecord.uid });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Registration failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

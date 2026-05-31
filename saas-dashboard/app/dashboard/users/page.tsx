@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ShieldCheck, User as UserIcon } from "lucide-react";
 import toast from "react-hot-toast";
@@ -14,32 +14,37 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
 
-  // Guard: redirect non-admins away
   useEffect(() => {
     if (currentRole && currentRole !== "admin") {
       router.replace("/dashboard");
+      return;
     }
-  }, [currentRole, router]);
+    if (currentRole !== "admin") return;
 
-  const fetchUsers = useCallback(async () => {
-    try {
-      const token = await getToken();
-      const res = await fetch("/api/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      setUsers(data.users);
-    } catch {
-      toast.error("Failed to load users");
-    } finally {
-      setLoading(false);
+    let cancelled = false;
+
+    async function loadUsers() {
+      try {
+        const token = await getToken();
+        const res = await fetch("/api/users", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        if (!cancelled) setUsers(data.users);
+      } catch {
+        if (!cancelled) toast.error("Failed to load users");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
-  }, [getToken]);
 
-  useEffect(() => {
-    if (currentRole === "admin") fetchUsers();
-  }, [currentRole, fetchUsers]);
+    void loadUsers();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentRole, router, getToken]);
 
   async function toggleRole(user: User) {
     const newRole = user.role === "admin" ? "viewer" : "admin";

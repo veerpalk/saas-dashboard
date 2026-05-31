@@ -4,7 +4,6 @@ import {
   User,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase/client";
