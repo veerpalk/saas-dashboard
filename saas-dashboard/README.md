@@ -407,6 +407,7 @@ In-depth guides for each project requirement:
 
 | Doc | Topic |
 |---|---|
+| [docs/00-assignment-submission.md](./docs/00-assignment-submission.md) | **Assignment submission** — overview, live links, requirement coverage |
 | [docs/01-authentication-and-authorization.md](./docs/01-authentication-and-authorization.md) | Firebase auth, route protection, roles, OWASP |
 | [docs/02-product-crud.md](./docs/02-product-crud.md) | Product CRUD, data access layer, API reference |
 | [docs/03-dashboard-and-data-display.md](./docs/03-dashboard-and-data-display.md) | KPIs, charts, TanStack Table, responsive layout |

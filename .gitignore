@@ -22,5 +22,6 @@ serviceAccount*.json
 # IDE / local
 .idea/
 .vscode/
+.venv-docx/
 *.swp
 *.swo
