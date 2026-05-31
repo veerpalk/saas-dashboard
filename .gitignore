@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+serviceAccount*.json
+*firebase-adminsdk*.json
+*-firebase-adminsdk-*.json
+
+# Firebase service account downloads (common naming patterns)
+**/firebase-service-account.json
+**/service-account.json
+
+# IDE / local
+.idea/
+.vscode/
+*.swp
+*.swo
