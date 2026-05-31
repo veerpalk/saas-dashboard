@@ -52,20 +52,20 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
+    <div className="min-h-screen flex items-center justify-center bg-blue-50/40">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl mb-3">
             S
           </div>
-          <h1 className="text-2xl font-bold text-slate-900">Create account</h1>
-          <p className="text-slate-500 text-sm mt-1">
-            New accounts start with the <strong>viewer</strong> role
+          <h1 className="text-2xl font-bold text-blue-950">Create account</h1>
+          <p className="muted-text text-sm mt-1">
+            New accounts start with the <strong className="text-blue-800">viewer</strong> role
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+        <div className="card-surface rounded-2xl p-8">
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg mb-5">
               {error}
@@ -74,7 +74,7 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+              <label className="block text-sm font-medium text-blue-900 mb-1.5">
                 Email address
               </label>
               <input
@@ -83,12 +83,12 @@ export default function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input-field py-2.5"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+              <label className="block text-sm font-medium text-blue-900 mb-1.5">
                 Password
               </label>
               <input
@@ -97,12 +97,12 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="new-password"
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input-field py-2.5"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+              <label className="block text-sm font-medium text-blue-900 mb-1.5">
                 Confirm password
               </label>
               <input
@@ -111,7 +111,7 @@ export default function RegisterPage() {
                 onChange={(e) => setConfirm(e.target.value)}
                 required
                 autoComplete="new-password"
-                className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="input-field py-2.5"
               />
             </div>
 
@@ -124,7 +124,7 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-slate-500 mt-5">
+          <p className="text-center text-sm muted-text mt-5">
             Already have an account?{" "}
             <Link href="/login" className="text-blue-600 font-medium hover:underline">
               Sign in

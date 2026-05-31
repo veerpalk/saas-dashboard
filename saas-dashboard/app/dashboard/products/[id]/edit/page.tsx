@@ -57,19 +57,19 @@ export default function EditProductPage() {
       <div className="mb-6">
         <Link
           href="/dashboard/products"
-          className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-900 transition-colors mb-4"
+          className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-900 transition-colors mb-4"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Products
         </Link>
-        <h1 className="text-2xl font-bold text-slate-900">Edit Product</h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <h1 className="text-2xl font-bold text-blue-950">Edit Product</h1>
+        <p className="muted-text text-sm mt-1">
           Update the details for{" "}
-          <span className="font-medium text-slate-700">{product.name}</span>.
+          <span className="font-medium text-blue-800">{product.name}</span>.
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 p-6">
+      <div className="card-surface p-6">
         <ProductForm initial={product} />
       </div>
     </div>

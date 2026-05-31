@@ -14,14 +14,14 @@ const accentMap = {
 
 export default function StatCard({ label, value, sub, accent = "blue" }: StatCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5 flex flex-col gap-1">
-      <span className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+    <div className="card-surface p-5 flex flex-col gap-1">
+      <span className="text-xs font-medium text-blue-600 uppercase tracking-wide">
         {label}
       </span>
       <span className={`text-3xl font-bold ${accentMap[accent].split(" ")[1]}`}>
         {value}
       </span>
-      {sub && <span className="text-xs text-slate-400">{sub}</span>}
+      {sub && <span className="text-xs text-blue-500/90">{sub}</span>}
     </div>
   );
 }

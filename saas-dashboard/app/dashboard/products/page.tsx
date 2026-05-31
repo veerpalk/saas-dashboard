@@ -73,13 +73,13 @@ export default function ProductsPage() {
     columnHelper.accessor("name", {
       header: "Name",
       cell: (info) => (
-        <span className="font-medium text-slate-900">{info.getValue()}</span>
+        <span className="font-medium text-blue-950">{info.getValue()}</span>
       ),
     }),
     columnHelper.accessor("category", {
       header: "Category",
       cell: (info) => (
-        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-medium">
+        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-medium">
           {info.getValue()}
         </span>
       ),
@@ -118,7 +118,7 @@ export default function ProductsPage() {
           <div className="flex items-center gap-2 justify-end">
             <Link
               href={`/dashboard/products/${row.original.id}/edit`}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+              className="p-1.5 rounded-lg text-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
               title="Edit"
             >
               <Pencil className="w-4 h-4" />
@@ -126,7 +126,7 @@ export default function ProductsPage() {
             <button
               onClick={() => handleDelete(row.original.id, row.original.name)}
               disabled={deleting === row.original.id}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-40"
+              className="p-1.5 rounded-lg text-blue-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-40"
               title="Delete"
             >
               <Trash2 className="w-4 h-4" />
@@ -165,8 +165,8 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Products</h1>
-          <p className="text-slate-500 text-sm mt-1">
+          <h1 className="text-2xl font-bold text-blue-950">Products</h1>
+          <p className="muted-text text-sm mt-1">
             {products.length} product{products.length !== 1 ? "s" : ""} total
           </p>
         </div>
@@ -185,13 +185,13 @@ export default function ProductsPage() {
       <div className="flex flex-wrap gap-3">
         {/* Global search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-400" />
           <input
             type="text"
             placeholder="Search products…"
             value={globalFilter}
             onChange={(e) => setGlobalFilter(e.target.value)}
-            className="pl-9 pr-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-60"
+            className="filter-input pl-9 pr-3 py-2 w-60"
           />
         </div>
 
@@ -199,7 +199,7 @@ export default function ProductsPage() {
         <select
           value={statusFilterValue}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+          className="select-field px-3 py-2"
         >
           <option value="">All statuses</option>
           <option value="active">Active</option>
@@ -208,14 +208,14 @@ export default function ProductsPage() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="card-surface overflow-hidden">
         {loading ? (
           <div className="p-12 flex items-center justify-center">
             <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : table.getRowModel().rows.length === 0 ? (
           <div className="p-12 text-center">
-            <p className="text-slate-400 text-sm">No products found.</p>
+            <p className="subtle-text text-sm">No products found.</p>
             {isAdmin && (
               <Link
                 href="/dashboard/products/new"
@@ -228,19 +228,19 @@ export default function ProductsPage() {
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 border-b border-slate-200">
+            <thead className="table-head">
               {table.getHeaderGroups().map((hg) => (
                 <tr key={hg.id}>
                   {hg.headers.map((header) => (
                     <th
                       key={header.id}
-                      className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide"
+                      className="px-4 py-3 text-left text-xs font-semibold text-blue-600 uppercase tracking-wide"
                     >
                       {header.isPlaceholder ? null : (
                         <div
                           className={`flex items-center gap-1 ${
                             header.column.getCanSort()
-                              ? "cursor-pointer select-none hover:text-slate-900"
+                              ? "cursor-pointer select-none hover:text-blue-900"
                               : ""
                           }`}
                           onClick={header.column.getToggleSortingHandler()}
@@ -259,9 +259,9 @@ export default function ProductsPage() {
                 </tr>
               ))}
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-blue-50">
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="hover:bg-slate-50 transition-colors">
+                <tr key={row.id} className="table-row-hover">
                   {row.getVisibleCells().map((cell) => (
                     <td key={cell.id} className="px-4 py-3">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -276,7 +276,7 @@ export default function ProductsPage() {
 
       {/* Pagination */}
       {!loading && table.getPageCount() > 1 && (
-        <div className="flex items-center justify-between text-sm text-slate-600">
+        <div className="flex items-center justify-between text-sm text-blue-700">
           <span>
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
@@ -285,14 +285,14 @@ export default function ProductsPage() {
             <button
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-3 py-1.5 rounded-lg border border-blue-200 text-blue-700 hover:bg-blue-50 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Previous
             </button>
             <button
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-3 py-1.5 rounded-lg border border-blue-200 text-blue-700 hover:bg-blue-50 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Next
             </button>

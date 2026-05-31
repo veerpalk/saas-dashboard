@@ -86,49 +86,49 @@ export default function UsersPage() {
     <div className="p-8 space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Users</h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <h1 className="text-2xl font-bold text-blue-950">Users</h1>
+        <p className="muted-text text-sm mt-1">
           Manage team members and their roles.
         </p>
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div className="card-surface overflow-hidden">
         {loading ? (
           <div className="p-12 flex items-center justify-center">
             <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 border-b border-slate-200">
+            <thead className="table-head">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-blue-600 uppercase tracking-wide">
                   User
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-blue-600 uppercase tracking-wide">
                   Role
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                <th className="px-4 py-3 text-left text-xs font-semibold text-blue-600 uppercase tracking-wide">
                   Joined
                 </th>
                 <th className="px-4 py-3" />
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-blue-50">
               {users.map((user) => {
                 const isSelf = user.id === currentUser?.uid;
                 return (
-                  <tr key={user.id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={user.id} className="table-row-hover">
                     {/* User */}
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-500 uppercase shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-xs font-semibold text-blue-600 uppercase shrink-0">
                           {user.email[0]}
                         </div>
                         <div>
-                          <p className="font-medium text-slate-900">{user.email}</p>
+                          <p className="font-medium text-blue-950">{user.email}</p>
                           {isSelf && (
-                            <p className="text-xs text-slate-400">You</p>
+                            <p className="text-xs text-blue-500">You</p>
                           )}
                         </div>
                       </div>
@@ -140,7 +140,7 @@ export default function UsersPage() {
                         className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
                           user.role === "admin"
                             ? "bg-purple-50 text-purple-700"
-                            : "bg-slate-100 text-slate-600"
+                            : "bg-blue-100 text-blue-700"
                         }`}
                       >
                         {user.role === "admin" ? (
@@ -153,7 +153,7 @@ export default function UsersPage() {
                     </td>
 
                     {/* Joined */}
-                    <td className="px-4 py-3 text-slate-500">
+                    <td className="px-4 py-3 text-blue-600">
                       {formatDate(user.createdAt)}
                     </td>
 
@@ -164,7 +164,7 @@ export default function UsersPage() {
                         disabled={isSelf || updating === user.id}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${
                           user.role === "admin"
-                            ? "border-slate-200 text-slate-600 hover:bg-slate-50"
+                            ? "border-blue-200 text-blue-700 hover:bg-blue-50"
                             : "border-purple-200 text-purple-700 hover:bg-purple-50"
                         }`}
                         title={isSelf ? "You cannot change your own role" : undefined}
@@ -184,10 +184,10 @@ export default function UsersPage() {
         )}
       </div>
 
-      <p className="text-xs text-slate-400">
+      <p className="text-xs text-blue-500/90">
         {users.length} user{users.length !== 1 ? "s" : ""} ·{" "}
         New users are created via the registration endpoint and default to the{" "}
-        <span className="font-medium">viewer</span> role.
+        <span className="font-medium text-blue-700">viewer</span> role.
       </p>
     </div>
   );

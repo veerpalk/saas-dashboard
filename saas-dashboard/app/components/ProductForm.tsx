@@ -143,7 +143,7 @@ export default function ProductForm({ initial }: ProductFormProps) {
       {/* Price */}
       <Field label="Price (USD)" error={errors.price?.[0]}>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-sm">
             $
           </span>
           <input
@@ -169,7 +169,7 @@ export default function ProductForm({ initial }: ProductFormProps) {
                   ? s === "active"
                     ? "border-emerald-500 bg-emerald-50 text-emerald-700"
                     : "border-red-400 bg-red-50 text-red-600"
-                  : "border-slate-200 text-slate-500 hover:border-slate-300"
+                  : "border-blue-200 text-blue-600 hover:border-blue-300 hover:bg-blue-50/60"
               }`}
             >
               <input
@@ -192,7 +192,7 @@ export default function ProductForm({ initial }: ProductFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+          className="flex-1 px-4 py-2.5 text-sm font-medium text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
         >
           Cancel
         </button>
@@ -219,7 +219,7 @@ function Field({
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-sm font-medium text-slate-700">{label}</label>
+      <label className="block text-sm font-medium text-blue-900">{label}</label>
       {children}
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
@@ -229,7 +229,7 @@ function Field({
 function inputCls(hasError: boolean) {
   return `w-full px-3 py-2.5 text-sm border rounded-lg focus:outline-none focus:ring-2 transition-colors ${
     hasError
-      ? "border-red-300 focus:ring-red-200"
-      : "border-slate-200 focus:ring-blue-200 focus:border-blue-400"
+      ? "border-red-300 bg-red-50/50 text-red-900 focus:ring-red-200"
+      : "border-blue-200 bg-blue-50/70 text-blue-900 focus:ring-blue-500/25 focus:border-blue-400"
   }`;
 }

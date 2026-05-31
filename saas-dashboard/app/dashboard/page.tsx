@@ -63,7 +63,7 @@ export default function DashboardPage() {
       <div className="p-8 flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-slate-500 text-sm">Loading analytics…</p>
+          <p className="muted-text text-sm">Loading analytics…</p>
         </div>
       </div>
     );
@@ -83,8 +83,8 @@ export default function DashboardPage() {
     <div className="p-8 space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
-        <p className="text-slate-500 text-sm mt-1">
+        <h1 className="text-2xl font-bold text-blue-950">Dashboard</h1>
+        <p className="muted-text text-sm mt-1">
           Overview of your product catalogue
         </p>
       </div>
@@ -109,8 +109,8 @@ export default function DashboardPage() {
       {/* Charts row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Bar chart: products per category */}
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <h2 className="text-sm font-semibold text-slate-700 mb-4">
+        <div className="card-surface p-6">
+          <h2 className="text-sm font-semibold text-blue-800 mb-4">
             Products by Category
           </h2>
           {byCategory.length === 0 ? (
@@ -145,8 +145,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Pie chart: active vs inactive */}
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <h2 className="text-sm font-semibold text-slate-700 mb-4">
+        <div className="card-surface p-6">
+          <h2 className="text-sm font-semibold text-blue-800 mb-4">
             Status Breakdown
           </h2>
           {kpis.total === 0 ? (
@@ -192,8 +192,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Line chart: daily creations */}
-      <div className="bg-white rounded-xl border border-slate-200 p-6">
-        <h2 className="text-sm font-semibold text-slate-700 mb-4">
+      <div className="card-surface p-6">
+        <h2 className="text-sm font-semibold text-blue-800 mb-4">
           Products Created — Last 30 Days
         </h2>
         <ResponsiveContainer width="100%" height={220}>
@@ -239,7 +239,7 @@ export default function DashboardPage() {
 
 function EmptyChart() {
   return (
-    <div className="h-[220px] flex items-center justify-center text-slate-400 text-sm">
+    <div className="h-[220px] flex items-center justify-center subtle-text text-sm">
       No data yet
     </div>
   );
