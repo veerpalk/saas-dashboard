@@ -1,6 +1,6 @@
 // lib/auth/middleware.ts
 import { NextRequest } from "next/server";
-import { adminAuth } from "@/lib/firebase/admin";
+import { getAdminAuth } from "@/lib/firebase/admin";
 import { getUser } from "@/lib/db/users";
 
 type AuthSuccess = { uid: string; role: "admin" | "viewer" };
@@ -19,7 +19,7 @@ export async function verifyToken(
   const token = authHeader.split("Bearer ")[1];
 
   try {
-    const decoded = await adminAuth.verifyIdToken(token);
+    const decoded = await getAdminAuth().verifyIdToken(token);
     const userData = await getUser(decoded.uid);
     return {
       uid: decoded.uid,

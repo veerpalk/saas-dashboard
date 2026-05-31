@@ -1,9 +1,9 @@
 // lib/db/users.ts
-import { adminDb } from "@/lib/firebase/admin";
+import { getAdminDb } from "@/lib/firebase/admin";
 import { User } from "@/types";
 
 export async function getUser(uid: string): Promise<User | null> {
-  const doc = await adminDb.collection("users").doc(uid).get();
+  const doc = await getAdminDb().collection("users").doc(uid).get();
   if (!doc.exists) return null;
   return { id: doc.id, ...doc.data() } as User;
 }
@@ -13,7 +13,7 @@ export async function createUser(
   email: string,
   role: "admin" | "viewer" = "viewer"
 ): Promise<void> {
-  await adminDb.collection("users").doc(uid).set({
+  await getAdminDb().collection("users").doc(uid).set({
     email,
     role,
     createdAt: new Date(),
@@ -21,7 +21,7 @@ export async function createUser(
 }
 
 export async function getAllUsers(): Promise<User[]> {
-  const snapshot = await adminDb
+  const snapshot = await getAdminDb()
     .collection("users")
     .orderBy("createdAt", "desc")
     .get();
@@ -32,5 +32,5 @@ export async function updateUserRole(
   uid: string,
   role: "admin" | "viewer"
 ): Promise<void> {
-  await adminDb.collection("users").doc(uid).update({ role });
+  await getAdminDb().collection("users").doc(uid).update({ role });
 }

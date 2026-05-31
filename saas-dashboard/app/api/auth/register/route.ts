@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "@/lib/firebase/admin";
+import { getAdminAuth } from "@/lib/firebase/admin";
 import { createUser } from "@/lib/db/users";
 
 export async function POST(req: NextRequest) {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Create user in Firebase Auth
-    const userRecord = await adminAuth.createUser({ email, password });
+    const userRecord = await getAdminAuth().createUser({ email, password });
 
     // Save role in Firestore
     await createUser(userRecord.uid, email, role);

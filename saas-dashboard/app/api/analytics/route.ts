@@ -1,7 +1,7 @@
 // app/api/analytics/route.ts
 import { type NextRequest } from "next/server";
 import { verifyToken } from "@/lib/auth/middleware";
-import { adminDb } from "@/lib/firebase/admin";
+import { getAdminDb } from "@/lib/firebase/admin";
 import { Product } from "@/types";
 
 // GET /api/analytics — aggregated KPIs + chart data (any authenticated user)
@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const snapshot = await adminDb
+    const snapshot = await getAdminDb()
       .collection("products")
       .orderBy("createdAt", "asc")
       .get();
